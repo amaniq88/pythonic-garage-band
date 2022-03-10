@@ -2,13 +2,10 @@ from cgi import test
 from typing_extensions import Self
 from unicodedata import name
 
-
-    
-
-
-
 class Musician :
-
+    """
+    superClass which other classes will Inherets from 
+    """
     def __init__(self, name):
         self.name = name
 
@@ -16,9 +13,12 @@ class Musician :
 
 
 class Guitarist(Musician):
+    """
+    Class Guitarist which have two methods get in strument and play solo
+    """
 
     def __str__(self):
-        return f'My name is {self.name} and I play guitar'
+        return f'My name is {self.name} and I play {self.get_instrument()}'
 
     def __repr__(self):
         return f'Guitarist instance. Name = {self.name}'
@@ -33,8 +33,11 @@ class Guitarist(Musician):
 
 
 class Bassist(Musician):
+    """
+    Class Bassist which have two methods get in strument and play solo
+    """
     def __str__(self):
-        return f'My name is {self.name} and I play bass'
+        return f'My name is {self.name} and I play {self.get_instrument()}'
 
     def __repr__(self):
         return f'Bassist instance. Name = {self.name}'
@@ -49,8 +52,12 @@ class Bassist(Musician):
 
 
 class Drummer(Musician):
+    """
+    Class Drummer which have two methods get in strument and play solo
+    """
+
     def __str__(self):
-        return f'My name is {self.name} and I play drums'
+        return f'My name is {self.name} and I play {self.get_instrument()}'
 
     def __repr__(self):
         return f'Drummer instance. Name = {self.name}'
@@ -63,23 +70,27 @@ class Drummer(Musician):
         return "rattle boom crash"
 
 class Band:
-    Band_list = []
+    """
+    Class Band which have two methods play_solos and to_list
+    play solo ask each instance to play solo as per the order list 
+    and to list will show the list of added instances 
+    """
+    instances = []
     def __init__(self, name , members):
         self.name = name
         self.members = members
-        Band.Band_list.append(self.name)
+        Band.instances.append(self)
 
    
     def play_solos(self):
         solos_list = []
-        for i in  range(0,len(self.members)):
-            oneSole = globals()[self.members[i]].play_solo(globals()[self.members[i]])
-            solos_list.append(oneSole)
+        for i in  self.members:
+            solos_list.append(i.play_solo())
         return solos_list
     
     @classmethod
     def to_list(cls):
-        return cls.Band_list    #which returns a list of previously created Band instances
+        return cls.instances   #which returns a list of previously created Band instances
 
 
 #if __name__== "__main__":
